@@ -272,6 +272,7 @@ Options:\n\
 			lyra2v2     MonaCoin\n\
 			lyra2v3     Vertcoin\n\
 			lyra2z      ZeroCoin (3rd impl)\n\
+			memehash    Memehash\n\
 			myr-gr      Myriad-Groestl\n\
 			monero      XMR cryptonight (v7)\n\
 			neoscrypt   FeatherCoin, Phoenix, UFO...\n\
@@ -2370,7 +2371,9 @@ static void *miner_thread(void *userdata)
 
 		/* scan nonces for a proof-of-work hash */
 		switch (opt_algo) {
-
+		case ALGO_MEMEHASH:
+			rc = scanhash_memehash(thr_id, &work, max_nonce, &hashes_done);
+			break;
 		case ALGO_ALLIUM:
 			rc = scanhash_allium(thr_id, &work, max_nonce, &hashes_done);
 			break;
